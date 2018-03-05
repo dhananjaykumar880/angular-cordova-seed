@@ -1,0 +1,16 @@
+import { Routes } from '@angular/router';
+// app
+import { HomeComponent } from './components/home/home.component';
+
+export const HomeRoutes: Routes = [
+    {
+        path: '',
+        component: HomeComponent,
+        data: { state: 'home' }
+    },
+    {
+        path: ':sync',
+        component: HomeComponent,
+        data: { state: 'sync' }
+    }
+];

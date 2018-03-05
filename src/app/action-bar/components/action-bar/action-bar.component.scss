@@ -1,0 +1,32 @@
+mat-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.remaining-space {
+    flex: 1 1 auto;
+}
+
+.material-icons {
+    padding: 0 10px;
+}
+
+.material-icons:first-child {
+    padding-left: 0;
+}
+
+.material-icons:last-child {
+    padding-right: 0;
+}
+
+.homeTitle > * {
+    vertical-align: middle;
+}
+
+.homeTitle > img {
+    width: 40px;
+    height: 40px;
+}

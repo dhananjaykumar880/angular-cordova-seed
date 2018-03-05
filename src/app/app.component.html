@@ -1,0 +1,10 @@
+<div *ngIf="isLoading" class="cdk-overlay-container">
+    <div class="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing" fxLayout="column" fxFill>
+        <div fxFlex fxLayoutAlign="center center">
+            <mat-spinner color="accent" diameter="50"></mat-spinner>
+        </div>
+    </div>
+</div>
+<main [class]="isBack ? 'slide-right' : 'slide-left'" [@routeAnimation]="getState(o)">
+    <router-outlet #o="outlet"></router-outlet>
+</main>

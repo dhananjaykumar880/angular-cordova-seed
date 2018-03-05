@@ -1,0 +1,45 @@
+import { Component, OnInit } from '@angular/core';
+import { Store, IActionBarConfig, LoginService, Config } from '../../../common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+@Component({
+  moduleId: module.id,
+  selector: 'App-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+  error: string;
+  error_description: string;
+  inLogin: boolean = false;
+  setupActionBar: IActionBarConfig = {
+    title: {
+      isTextTitle: true,
+      text: 'application.login'
+    },
+    isLogout: false
+  };
+
+  constructor(
+    private store: Store,
+    private loginService: LoginService,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit() {
+    let callBack = data => {
+      this.inLogin = false;
+      this.error = this.route.snapshot.queryParams.error || 'login.error';
+      this.error_description = this.route.snapshot.queryParams.error_description || 'login.description';
+    }
+    
+    this.route.params.subscribe(callBack);
+    this.route.queryParams.subscribe(callBack);
+  }
+
+  onLogin() {
+    this.inLogin = true;
+    this.loginService.doLogin();
+  }
+}

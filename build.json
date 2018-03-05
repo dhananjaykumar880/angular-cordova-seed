@@ -1,0 +1,15 @@
+{
+  "ios": {
+    "debug": {
+      "developmentTeam": "",
+      "codeSignIdentity": "iPhone Developer",
+      "packageType": "development"
+    },
+
+    "release": {
+      "developmentTeam": "",
+      "codeSignIdentity": "iPhone Distribution",
+      "packageType": "Distribution"
+    }
+  }
+}

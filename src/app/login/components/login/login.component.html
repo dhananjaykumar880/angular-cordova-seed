@@ -1,0 +1,17 @@
+<App-action-bar [setupActionBar]="setupActionBar"></App-action-bar>
+<div class="full-height">
+  <div fxLayout="column" fxFill>
+    <mat-card *ngIf="!inLogin" fxFlex fxLayoutAlign="center center">
+      <div>
+        <h2 [innerHtml]="error | translate"></h2>
+        <mat-card-content>
+          <p [innerHtml]="error_description | translate"></p>
+          <button mat-raised-button (click)="onLogin()" color="primary">Login</button>
+        </mat-card-content>
+      </div>
+    </mat-card>
+    <mat-card *ngIf="inLogin" fxFlex fxLayoutAlign="center center">
+      <h2>Loading...</h2>
+    </mat-card>
+  </div>
+</div>
