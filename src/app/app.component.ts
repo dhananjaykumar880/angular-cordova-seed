@@ -15,6 +15,19 @@ declare let cordova;
 export class AppComponent implements OnInit {
   isLoading: boolean = false;
   isBack: boolean = false;
+
+  /**
+   * Constructor with service injection
+   * set default settings and subscribe spinner and back event
+   * @param translate 
+   * @param dbService 
+   * @param store 
+   * @param cookie 
+   * @param spinner 
+   * @param eventHandler 
+   * @param cd 
+   * @param window 
+   */
   constructor(
     translate: TranslateService,
     private dbService: ClientDbService,
@@ -40,29 +53,43 @@ export class AppComponent implements OnInit {
       setTimeout(() => {
         me.isBack = false;
       }, 500);
-      this.cd.detectChanges();
+      me.cd.detectChanges();
     });
   }
   
+  /**
+   * check for deviceready and database connection
+   */
   ngOnInit() {
     document.addEventListener("deviceready", () => {
       Config.PLATFORM_TARGET = Config.PLATFORMS.MOBILE_NATIVE;
-      window.open = cordova.InAppBrowser.open;
+      window.open = cordova.ThemeableBrowser.open;
     }, false);
     
     this.connectToLocalDb();
   }
 
+  /**
+   * initiate database connection
+   */
   connectToLocalDb() {
     this.dbService.init().then(() => {
       console.log("Connected to local db ...");
     });
   }
 
+  /**
+   * return router animation state
+   * @param outlet 
+   */
   getState(outlet) {
     return outlet.activatedRouteData.state;
   }
 
+  /**
+   * set default settings
+   * @param settings 
+   */
   setSettings(settings) {
     for (let setting of Object.keys(settings)) {
       if (setting.indexOf('cookie:') !== -1) {

@@ -10,12 +10,16 @@
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
+    <allow-intent href="awb://*/*" />
     <allow-intent href="https://*/*" />
+    <allow-intent href="awbs://*/*" />
     <allow-intent href="cdvfile://*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent href="awemailclient://*/*" />
+    <allow-intent href="docsurfmobile://*/*" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
     <allow-navigation href="cdvfile://*" />
@@ -45,7 +49,6 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-sqlite-storage" spec="^2.2.0" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
     <plugin name="cordova-plugin-settings-hook" spec="^0.2.7" />
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
         <variable name="URL_SCHEME" value="myapp" />
@@ -53,9 +56,11 @@
         <variable name="ANDROID_HOST" value=" " />
         <variable name="ANDROID_PATHPREFIX" value="/" />
     </plugin>
-    <plugin name="cordova-plugin-safariviewcontroller" spec="^1.5.2" />
+    <plugin name="cordova-plugin-sfauthenticationsession" spec="^1.0.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <plugin name="cordova-plugin-nano-sqlite" spec="1.1.1" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <plugin name="cordova-plugin-themeablebrowser" spec="^0.2.17" />
     <engine name="ios" spec="^4.5.4" />
 </widget>

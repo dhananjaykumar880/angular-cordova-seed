@@ -4,14 +4,28 @@ import { Store, Config } from '../utils/index';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
+/**
+ * GetToken Service
+ * get token form token url after user login
+ */
 @Injectable()
 export class GetToken implements CanActivate {
+
+    /**
+     * Constructor with service injection
+     * @param store 
+     * @param router 
+     * @param http 
+     */
     constructor(
         private store: Store,
         private router: Router,
         private http: HttpClient
     ) { }
 
+    /**
+     * return header with authorization
+     */
     private createRequestHeader() {
         let headers = new HttpHeaders({});
         headers = headers.append("Authorization", 'Basic ' + btoa(Config.API.OAUTH_CLIENTID + ':' + Config.API.OAUTH_SECRET));
@@ -19,6 +33,11 @@ export class GetToken implements CanActivate {
         return headers;
     }
 
+    /**
+     * get token when code is available
+     * @param route 
+     * @param state 
+     */
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (route.queryParams.code) {
             Config.CODE = route.queryParams.code;

@@ -1,4 +1,4 @@
-import { HotTopicService, AuthGuard, ClientDbService, FileService, SyncService, LoginService, GetToken, LoadingService } from './services/index';
+import { AuthGuard, ClientDbService, FileService, SyncService, LoginService, GetToken, LoadingService, HttpDataService } from './services/index';
 import { Store, EventHandler } from './utils/index';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -8,8 +8,11 @@ export * from './pipes/index';
 export * from './interfaces/index';
 export * from './shared.module';
 
+/**
+ * export all services to inject in app module
+ */
 export const SERVICE_PROVIDERS: any[] = [
-    HotTopicService,
+    HttpDataService,
     AuthGuard,
     GetToken,
     ClientDbService,

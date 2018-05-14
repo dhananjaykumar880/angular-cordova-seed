@@ -1,4 +1,7 @@
-export * from './hot-topic.service';
+/**
+ * Export every service
+ */
+export * from './http-data.service';
 export * from './auth-guard.service';
 export * from './get-token.service';
 export * from './http-interceptor.service';

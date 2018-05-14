@@ -35,7 +35,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Run on device
 
-Run `npm run device:[platform]` to execute application on desire platform.
+Run `npm run run:[platform]` to execute application on desire platform.
 
 Use "assests/path/to/file" path instead of "/assets/path/to/file" for local device file
 

@@ -1,9 +1,16 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { HttpRequest } from "@angular/common/http";
 
+/**
+ * LoadingService
+ * this service is used for spinner show and hide
+ */
 @Injectable()
 export class LoadingService {
 
+    /**
+     * will be use for subscribe
+     */
     onLoadingChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**

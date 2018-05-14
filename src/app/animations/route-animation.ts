@@ -1,11 +1,14 @@
 import { animate, style, transition, trigger, query, group } from '@angular/animations';
 
+/**
+ * page animation on route change based on backward or forward
+ */
 export const routeAnimation = trigger("routeAnimation", [
     transition('* <=> *', [
         group([
             query(':enter, :leave', [
                 style({ position: 'fixed', 'width': '100%' }),
-                query('mat-toolbar', style({ position: 'fixed', top: '-64px' }), { optional: true }),
+                query('app-action-bar mat-toolbar', style({ position: 'fixed', top: '-64px' }), { optional: true }),
             ], { optional: true }),
             query(':enter', style({ transform: 'translate3d(100%, 0, 0)', 'opacity': 0 }), { optional: true }),
         ]),

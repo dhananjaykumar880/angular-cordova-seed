@@ -11,6 +11,6 @@ export const HomeRoutes: Routes = [
     {
         path: ':sync',
         component: HomeComponent,
-        data: { state: 'sync' }
+        data: { state: 'home' }
     }
 ];

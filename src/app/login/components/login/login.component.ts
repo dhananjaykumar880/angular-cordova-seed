@@ -21,12 +21,21 @@ export class LoginComponent implements OnInit {
     isLogout: false
   };
 
+  /**
+   * Constructor with service injection
+   * @param store 
+   * @param loginService 
+   * @param route 
+   */
   constructor(
     private store: Store,
     private loginService: LoginService,
     private route: ActivatedRoute
   ) { }
 
+  /**
+   * subscribe params and queryparams from route
+   */
   ngOnInit() {
     let callBack = data => {
       this.inLogin = false;
@@ -38,6 +47,9 @@ export class LoginComponent implements OnInit {
     this.route.queryParams.subscribe(callBack);
   }
 
+  /**
+   * open login page on login button
+   */
   onLogin() {
     this.inLogin = true;
     this.loginService.doLogin();

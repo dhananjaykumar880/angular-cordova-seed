@@ -17,6 +17,22 @@ mat-icon {
     text-align: center;
 }
 
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.pull-left {
+    float: left;   
+}
+
+.pull-right {
+    float: right;
+}
+
 .full-height {
     height: calc(100vh - 64px);
 }

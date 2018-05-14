@@ -1,6 +1,11 @@
 {
     "application":  {
-        "title":"Application"
+        "title":"Application",
+        "login": "Login"
+    },
+    "login": {
+        "error": "Wrong...",
+        "description": "Login is not completed! Please login."
     },
     "data": {
         "notAvailable": "No news available :("

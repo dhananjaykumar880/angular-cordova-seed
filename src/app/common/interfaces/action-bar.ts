@@ -1,3 +1,6 @@
+/**
+ * Interface for Actionbar buttons and there values
+ */
 export interface IActionBarConfig {
     isBack?: Boolean;
     back?: IActionBack;
@@ -9,11 +12,17 @@ export interface IActionBarConfig {
     isClose?: Boolean;
 }
 
+/**
+ * Interface for back button in Action bar based on visibility
+ */
 export interface IActionBack {
     isBack?: Boolean;
     isVisible?: Boolean;
 }
 
+/**
+ * Interface for Title in Action bar (Only text/ Text with logo)
+ */
 export interface IActionTitle {
     isHomeTitle?: Boolean;
     isTextTitle?: Boolean;

@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z6" color="primary">
+<mat-toolbar class="mat-elevation-z6" color="primary" [attr.unselectable]="'on'" (selectstart)="'return false;'">
   <button *ngIf="config.isBack" type="button" (click)="onBack()" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>

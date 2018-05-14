@@ -4,9 +4,21 @@ import { Store, Config } from '../utils';
 declare let cordova;
 declare let FileTransfer;
 
+/**
+ * File service
+ * access persistent location into touch device
+ * save and access local files
+ */
 @Injectable()
 export class FileService {
     private appRoot: any;
+
+    /**
+     * Constructor with service injection
+     * initialise persistent location of touch device
+     * @param store 
+     * @param window 
+     */
     constructor(
         private store: Store,
         @Inject("WINDOW") private window: any
@@ -21,14 +33,36 @@ export class FileService {
         }
     }
 
+    /**
+     * check file name is valid or not
+     * @param filePath with extension
+     */
     private checkFileName(filePath) {
-        return !!filePath.slice((filePath.lastIndexOf(".") - 1 >>> 0) + 2);
+        return !!Config.getExtenstion(filePath);
     }
 
+    /**
+     * get root folder url in cdvfile:// format
+     */
     getRootURL() {
         return this.appRoot.toInternalURL();
     }
 
+    isExist(filePath: string) {
+        return new Promise(resolve => {
+            this.window.resolveLocalFileSystemURL(Config.FILE_ROOT_URL + filePath, () => {
+                resolve(true);
+            }, () => {
+                resolve(false);
+            });
+        })
+    }
+
+    /**
+     * Get folder entry from given root
+     * @param folderPath is target folder
+     * @param fromFolder is root folder from you want to get target folder
+     */
     getFolder(folderPath, fromFolder = this.appRoot) {
         return new Promise((resolve, reject) => {
             let pos = folderPath.indexOf('/'),
@@ -52,6 +86,10 @@ export class FileService {
         })
     }
 
+    /**
+     * Get file entry based on location and file name
+     * @param filePath is file location with file name
+     */
     getFile(filePath: string) {
         return new Promise((resolve, reject) => {
             let temp = filePath.split('/'),
@@ -71,6 +109,11 @@ export class FileService {
         })
     }
 
+    /**
+     * Download any type of file from given url to given file location
+     * @param url from where content will be download
+     * @param filePath is where content will be save
+     */
     download(url: string, filePath: string) {
         return new Promise((resolve, reject) => {
             this.getFile(filePath).then((fileEntry: any) => {
@@ -101,6 +144,11 @@ export class FileService {
         })
     }
 
+    /**
+     * Save content with given filename into touch device
+     * @param filename is a file name with file location
+     * @param content is save into given file name
+     */
     saveToApp(filename: string, content: any) {
         this.getFile(filename).then((fileEntry: any) => {
 
@@ -114,6 +162,36 @@ export class FileService {
                 };
                 fileWriter.write(content);
             })
+        });
+    }
+
+    /**
+     * Check all directory and files and delete old file
+     * @param path local file/folder location
+     */
+    cleanOldAssetIfAvailable(ignoreArray: Array<any>, path: string = "/") {
+        let currentDate = (new Date()).getTime() - 3600 * 1000;
+        this.getFolder(path).then((dirEntry: any) => {
+            dirEntry.createReader().readEntries(entries => {
+                entries.forEach(entry => {
+                    if (entry.isFile) {
+                        entry.file(file => {
+                            let name = file.name.substr(0, file.name.lastIndexOf('.')),
+                                ignore = ignoreArray.filter(ig => ig.indexOf(name) > -1).length > 0;
+
+                            if (!ignore && currentDate > file.lastModified) {
+                                entry.remove(() => {
+                                    console.log("removed" + file.name);
+                                }, () => {
+                                    console.log("encountered error" + file.name);
+                                });
+                            }
+                        })
+                    } else {
+                        this.cleanOldAssetIfAvailable(ignoreArray, entry.fullPath.substr(1, entry.fullPath.length - 1));
+                    }
+                });
+            });
         });
     }
 }

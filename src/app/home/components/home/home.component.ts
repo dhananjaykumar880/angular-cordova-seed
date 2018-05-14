@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Store, HotTopicService, NewsResponse, IActionBarConfig, Config } from '../../../common';
+import { Store, NewsResponse, IActionBarConfig, Config, HttpDataService } from '../../../common';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -19,13 +19,23 @@ export class HomeComponent implements OnInit {
         }
     };
 
+    /**
+     * Constructor with service injection
+     * @param http 
+     * @param store 
+     * @param httpData 
+     * @param route 
+     */
     constructor(
         private http: HttpClient,
         private store: Store,
-        private hotTopic: HotTopicService,
+        private httpData: HttpDataService,
         private route: ActivatedRoute,
     ) { }
 
+    /**
+     * subscribe route params for get news
+     */
     ngOnInit() {
         if (Config.IS_MOBILE_NATIVE) {
             this.setupActionBar.isSync = true;
@@ -36,8 +46,11 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    /**
+     * get news from hot topic service
+     */
     getList() {
-        this.hotTopic.getNewsList().subscribe(res => {
+        this.httpData.getNewsList().subscribe(res => {
             this.newsList = res;
             this.store.set("newsList", this.newsList);
         }, err => {

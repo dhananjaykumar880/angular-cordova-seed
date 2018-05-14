@@ -9,8 +9,21 @@ import { Config, Store } from '../../common/utils';
 import { LoginService } from './login.service';
 import { LoadingService } from './loader.service';
 
+/**
+ * CustomHttpInterceptor service
+ * service is used to modify every http request
+ */
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
+
+    /**
+     * Constructor with service injection
+     * @param router 
+     * @param location 
+     * @param store 
+     * @param loginService 
+     * @param spinner 
+     */
     constructor(
         private router: Router,
         private location: Location,
@@ -19,6 +32,12 @@ export class CustomHttpInterceptor implements HttpInterceptor {
         private spinner: LoadingService
     ) { }
 
+    /**
+     * add authorization on each request
+     * handle request success and fail based on status code
+     * @param request 
+     * @param next 
+     */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let authorization = request.headers.get('Authorization'),
             token = this.store.get("token", false);
@@ -47,7 +66,6 @@ export class CustomHttpInterceptor implements HttpInterceptor {
                     case 401:
                     case 403:
                         // not logged in so redirect to login page with the return url
-                        this.store.set("authenticated", false);
                         this.location.replaceState("/");
                         this.loginService.doLogin();
                         break;

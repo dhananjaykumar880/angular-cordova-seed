@@ -119,4 +119,8 @@ export class Config {
     public static ASSET_URL: string = Config.API.BASE_URL + "";
     public static ATTACHMENT_URL: string = Config.API.BASE_URL + "";
     public static MESSAGE_URL: string = Config.API.BASE_URL + "";
+
+    public static getExtenstion(fileName: string): string {
+        return fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2);
+    };
 }
