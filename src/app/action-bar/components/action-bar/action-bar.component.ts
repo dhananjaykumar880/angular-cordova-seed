@@ -27,7 +27,6 @@ const defaultConfig: IActionBarConfig = {
 };
 
 @Component({
-  moduleId: module.id,
   selector: 'App-action-bar',
   templateUrl: './action-bar.component.html',
   styleUrls: ['./action-bar.component.scss']

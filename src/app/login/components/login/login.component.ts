@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  moduleId: module.id,
   selector: 'App-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

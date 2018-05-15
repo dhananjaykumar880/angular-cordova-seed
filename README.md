@@ -1,13 +1,13 @@
 # angular-cordova-seed
 Angular 5 + Cordova + Material + basic cordova plugin for cross device ( browser/mobile/tablet )
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1.
 
 ## Get started
 
 Run `mkdir www` if unavailable because cordova only work when `www` folder is exists.
-Run `npm install`
-Run `cordova prepare`
+Refer Create icons and splash screen then
+Run `npm run setup`
 
 ## Development server
 
@@ -19,7 +19,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
@@ -46,3 +46,7 @@ Refer [Splash](https://www.npmjs.com/package/cordova-splash) and [Icon](https://
 then run below command after platfrom remove/add.
 
 `cordova-splash --splash=res/splash.png` and `cordova-icon --icon=res/icon.png`
+
+## Ref
+
+> https://blog.angular.io/version-6-of-angular-now-available-cc56b0efa7a4

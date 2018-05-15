@@ -4,7 +4,6 @@ import { Store, NewsResponse, IActionBarConfig, Config, HttpDataService } from '
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    moduleId: module.id,
     selector: 'App-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
