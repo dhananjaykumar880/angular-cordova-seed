@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Get started
 
 Run `mkdir www` if unavailable because cordova only work when `www` folder is exists.
-Refer Create icons and splash screen then
+Refer [Create icons and splash screen] then
 Run `npm run setup`
 
 ## Development server
