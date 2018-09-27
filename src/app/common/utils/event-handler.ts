@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/from';
+import { Subject, from } from 'rxjs';
 
 /**
  * EventHandler service
@@ -18,7 +16,7 @@ export class EventHandler {
      */
     constructor() {
         this.eventsSubject = new Subject();
-        this.events = Observable.from(this.eventsSubject);
+        this.events = from(this.eventsSubject);
 
         this.events.subscribe(
             ({ name, args }) => {
