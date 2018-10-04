@@ -1,17 +1,20 @@
 <App-action-bar [setupActionBar]="setupActionBar"></App-action-bar>
-<div class="full-height">
-  <div fxLayout="column" fxFill>
-    <mat-card *ngIf="!inLogin" fxFlex fxLayoutAlign="center center">
+<div class="full-height">>
+    <mat-card *ngIf="!inLogin">
       <div>
         <h2 [innerHtml]="error | translate"></h2>
         <mat-card-content>
           <p [innerHtml]="error_description | translate"></p>
-          <button mat-raised-button (click)="onLogin()" color="primary">Login</button>
+          <div style="text-align: center;">
+            <button mat-flat-button color="accent" (click)="onLogin()">
+              <mat-icon>forward</mat-icon>
+              <span translate>Login</span>
+            </button>
+          </div>
         </mat-card-content>
       </div>
     </mat-card>
-    <mat-card *ngIf="inLogin" fxFlex fxLayoutAlign="center center">
-      <h2>Loading...</h2>
+    <mat-card *ngIf="inLogin">
+      <mat-card-title>Loading...</mat-card-title>
     </mat-card>
-  </div>
 </div>

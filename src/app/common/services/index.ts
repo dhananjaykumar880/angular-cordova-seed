@@ -10,3 +10,4 @@ export * from './sync.service';
 export * from './client-db.service';
 export * from './login.service';
 export * from './loader.service';
+export * from './pop-event.service';

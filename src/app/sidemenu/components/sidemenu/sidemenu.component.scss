@@ -1,0 +1,10 @@
+@import 'src/assets/theme/variable';
+
+:host {
+    display: block;
+    width: 250px;
+}
+
+mat-toolbar {
+    height: $actionBarHeight;
+}

@@ -1,11 +1,11 @@
-import { AuthGuard, ClientDbService, FileService, SyncService, LoginService, GetToken, LoadingService, HttpDataService } from './services/index';
-import { Store, EventHandler } from './utils/index';
+import { AuthGuard, ClientDbService, FileService, SyncService, LoginService, GetToken, LoadingService, HttpDataService, PopEventService } from './services';
+import { Store, EventHandler } from './utils';
 import { CookieService } from 'ngx-cookie-service';
 
-export * from './utils/index';
-export * from './services/index';
-export * from './pipes/index';
-export * from './interfaces/index';
+export * from './utils';
+export * from './services';
+export * from './pipes';
+export * from './interfaces';
 export * from './shared.module';
 
 /**
@@ -22,5 +22,6 @@ export const SERVICE_PROVIDERS: any[] = [
     FileService,
     SyncService,
     LoginService,
-    LoadingService
+    LoadingService,
+    PopEventService
 ];

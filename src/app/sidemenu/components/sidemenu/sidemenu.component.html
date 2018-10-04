@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <span class="remaining-space"></span>
+  <button type="button" mat-icon-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-nav-list (click)="container.toggle()">
+  <a mat-list-item *ngFor="let list of lists" [routerLink]="list.route" routerLinkActive>
+    {{list.display}}
+  </a>
+</mat-nav-list>
+<mat-list>
+  <mat-list-item>
+    {{'sidemenu.about' | translate}}
+    <span class="remaining-space"></span>
+    <span style="font-size: 10px;color: lightgray">v{{version}}</span>
+  </mat-list-item>
+</mat-list>

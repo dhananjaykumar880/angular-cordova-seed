@@ -1,4 +1,4 @@
-@import "./src/assets/theme/variable";
+@import "src/assets/theme/variable";
 
 .card {
     margin: 5px;
@@ -12,7 +12,7 @@
     white-space: normal;
     word-wrap: break-word;
     font-size: 24px;
-    color: $app-blue;
+    color: $primary;
 }
 
 // .card:last-child > button {

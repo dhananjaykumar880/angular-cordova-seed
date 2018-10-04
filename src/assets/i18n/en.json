@@ -7,6 +7,9 @@
         "error": "Wrong...",
         "description": "Login is not completed! Please login."
     },
+    "sidemenu": {
+        "about": "About"
+    },
     "data": {
         "notAvailable": "No news available :("
     }

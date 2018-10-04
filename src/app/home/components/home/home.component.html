@@ -1,6 +1,6 @@
 <App-action-bar [setupActionBar]="setupActionBar"></App-action-bar>
-<ng-container *ngIf="newsList?.length; else noRecord">
-    <div fxLayout="row wrap" fxLayoutAlign="start" [ngStyle]="{'padding': '5px'}">
+<ng-container *ngIf="newsList; else failed">
+    <div *ngIf="eventList.length; else noRecord" fxLayout="row wrap" fxLayoutAlign="start" [ngStyle]="{'padding': '5px'}">
         <div *ngFor="let news of newsList" fxFlex class="card">
             <button mat-raised-button>
                 <img [src]="news.iconUrl | safeUrl" onerror="this.src='assets/icons/error.png'" [alt]="news.title">
@@ -14,6 +14,15 @@
         <div fxLayout="column" fxFill>
             <mat-card fxFlex fxLayoutAlign="center center">
                 <h3 [innerHtml]="'data.notAvailable' | translate"></h3>
+            </mat-card>
+        </div>
+    </div>
+</ng-template>
+<ng-template #failed>
+    <div class="full-height">
+        <div fxLayout="column" fxFill>
+            <mat-card fxFlex fxLayoutAlign="center center">
+                <div [innerHtml]="error"></div>
             </mat-card>
         </div>
     </div>

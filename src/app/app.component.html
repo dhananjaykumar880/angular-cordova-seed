@@ -5,6 +5,13 @@
         </div>
     </div>
 </div>
-<main [class]="isBack ? 'slide-right' : 'slide-left'" [@routeAnimation]="getState(o)">
-    <router-outlet #o="outlet"></router-outlet>
-</main>
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push">
+        <app-sidemenu [container]="sidenav"></app-sidemenu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <main [class]="isBack ? 'slide-right' : 'slide-left'" [@routeAnimation]="getState(o)">
+            <router-outlet #o="outlet"></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

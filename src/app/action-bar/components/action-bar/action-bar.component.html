@@ -2,6 +2,9 @@
   <button *ngIf="config.isBack" type="button" (click)="onBack()" mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
   </button>
+  <button *ngIf="config.isSideBar" type="button" (click)="onSideBar()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
   <span *ngIf="config.title.isHomeTitle" class="homeTitle">
     <img src="assets/icons/logo.png" />
     <span [innerText]="'application.title' | translate"></span>

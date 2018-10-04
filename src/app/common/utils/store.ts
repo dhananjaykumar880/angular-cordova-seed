@@ -13,7 +13,11 @@ export class Store {
      * @param window 
      */
     constructor(@Inject('WINDOW') private window: any) {
-        this.localStorage = window.localStorage;
+        this.localStorage = new localStore();
+    }
+
+    private getSource(fromLocal?: boolean) {
+        return fromLocal ? this.localStorage : this.window.localStorage;
     }
 
     /**
@@ -21,9 +25,10 @@ export class Store {
      * @param key 
      * @param value 
      */
-    get(key: any, value?: any) {
-        let ret = JSON.parse(this.localStorage.getItem(key));
-        if(ret !== null) {
+    get(key: any, value?: any, fromLocal?: boolean) {
+        let source = this.getSource(fromLocal),
+            ret = JSON.parse(source.getItem(key));
+        if (ret !== null) {
             return ret;
         } else {
             return value;
@@ -35,22 +40,45 @@ export class Store {
      * @param key 
      * @param value 
      */
-    set(key: any, value: any) {
-        this.localStorage.setItem(key, JSON.stringify(value));
+    set(key: any, value: any, fromLocal?: boolean) {
+        let source = this.getSource(fromLocal);
+        source.setItem(key, JSON.stringify(value));
     }
 
     /**
      * remove given key
      * @param key 
      */
-    remove(key: any) {
-        this.localStorage.removeItem(key);
+    remove(key: any, fromLocal?:boolean) {
+        let source = this.getSource(fromLocal);
+        source.removeItem(key);
     }
 
     /**
      * clear all available keys
      */
+    clear(fromLocal?:boolean) {
+        let source = this.getSource(fromLocal);
+        source.clear();
+    }
+}
+
+class localStore {
+    private store: Object = {};
+
+    getItem(key: any) {
+        return this.store[key] || null;
+    }
+
+    setItem(key: any, value: any) {
+        this.store[key] = value;
+    }
+
+    removeItem(key: any) {
+        delete this.store[key];
+    }
+
     clear() {
-        this.localStorage.clear();
+        this.store = {};
     }
 }

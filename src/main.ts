@@ -15,7 +15,10 @@ declare let navigator: Navigator;
 
 if (environment.production) {
   enableProdMode();
-  Config.API = Config.PROD;
+}
+
+if (environment.loginLocal) {
+	Config.LOGIN_LOCAL = true;
 }
 
 const bootstrap = () => {

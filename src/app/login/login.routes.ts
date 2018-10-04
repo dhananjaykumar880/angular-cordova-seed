@@ -7,7 +7,8 @@ export const LoginRoutes: Routes = [
     {
         path: '',
         component: LoginComponent,
-        canActivate: [GetToken]
+        canActivate: [GetToken],
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange'
     },
     {
         path: ':error',

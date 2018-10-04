@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
-import { Config, Store } from '../../common/utils';
+import { Config, Store } from '../utils';
 import { LoginService } from './login.service';
 import { LoadingService } from './loader.service';
 
@@ -42,12 +42,19 @@ export class CustomHttpInterceptor implements HttpInterceptor {
         let authorization = request.headers.get('Authorization'),
             token = this.store.get("token", false);
 
-        request = request.clone({
-            withCredentials: true
-        });
+        // request = request.clone({
+        //     withCredentials: true
+        // });
         if (!authorization && token) {
             request = request.clone({
-                headers: request.headers.set("Authorization", "Bearer " + token.access_token),
+                headers: request.headers.set("Authorization", "Bearer " + token.access_token)
+            });
+        }
+        if (Config.LOGIN_LOCAL) {
+            let headers = request.headers;
+            headers = headers.append('X-Mashery-Oauth-User-Context', Config.LOGIN_CONFIG.USER_CONTEXT);
+            request = request.clone({
+                headers: headers
             });
         }
 
@@ -66,6 +73,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
                     case 401:
                     case 403:
                         // not logged in so redirect to login page with the return url
+                        this.store.set("authenticated", false);
                         this.location.replaceState("/");
                         this.loginService.doLogin();
                         break;

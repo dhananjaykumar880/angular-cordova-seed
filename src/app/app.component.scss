@@ -1,8 +1,16 @@
-:host {
+@import 'src/assets/theme/variable';
+
+:host main {
     position: relative;
-    top: 64px;
+    top: $actionBarHeight;
 }
 
-.cdk-overlay-container {
-    height: 100vh;
+// .cdk-overlay-container {
+//     height: 100vh;
+// }
+
+@media (max-width: 599px) {
+    :host main {
+        top: $actionBarHeight - 10px;
+    }
 }

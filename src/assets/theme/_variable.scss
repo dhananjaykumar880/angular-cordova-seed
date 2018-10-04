@@ -1,6 +1,37 @@
 @import '~@angular/material/theming';
 
-// Custom variables
-$app-blue: #071d49;
-$app-gray: #8d8ca5;
-$app-white: #ffffff;
+// define a real custom palette (using http://mcg.mbitson.com)
+@import 'palette';
+
+// Define the default theme (same as the example above).
+$lh-app-primary : mat-palette($md-lhblue);
+$lh-app-accent: mat-palette($md-lhyellow);
+$lh-app-warn : mat-palette($mat-red);
+$lh-theme: mat-light-theme($lh-app-primary, $lh-app-accent, $lh-app-warn);
+$lh-foreground: #000036;
+$lh-background: #ffffff;
+$lh-background-dark: #ebebeb;
+
+$lhg-app-primary: mat-palette($md-lhgblue);
+$lhg-app-accent : mat-palette($md-lhgyellow);
+$lhg-app-warn : mat-palette($mat-red);
+$lhg-theme: mat-light-theme($lhg-app-primary, $lhg-app-accent, $lhg-app-warn);
+$lhg-foreground: #05164d;
+$lhg-background: #ffffff;
+$lhg-background-dark: #f4f4f4;
+
+// Set active theme
+$theme: $lh-theme;
+$foreground: $lh-foreground;
+$background: $lh-background;
+$background-dark: $lh-background-dark;
+
+// Create your Sass color vars (will be available in all the project)
+$primary: mat-color(map-get($theme, primary));
+$accent: mat-color(map-get($theme, accent));
+$warn: mat-color(map-get($theme, warn));
+$foreground-light: mat-color(map-get($theme, primary), 300);
+$foreground-lighter: mat-color(map-get($theme, primary), 100);
+
+// App specific variables
+$actionBarHeight: 64px;

@@ -44,9 +44,12 @@ export class EventHandler {
     /**
      * remove given event name from listeners object
      */
-    off(name) {
+    off(name, listener) {
         if (this.listeners[name]) {
-            delete this.listeners[name];
+            const index = this.listeners[name].indexOf(listener);
+            if(index !== -1) {
+                this.listeners[name].splice(index, 1);
+            }
         }
     }
 

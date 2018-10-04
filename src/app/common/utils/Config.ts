@@ -1,4 +1,5 @@
 import * as Hashes from "jshashes";
+import { version } from '../../../../package.json';
 
 export interface IPlatforms {
     WEB: string;
@@ -17,6 +18,14 @@ export interface IApi {
 export class Config {
 
     constructor() { }
+
+    public static get version(): string {
+        return version;
+    }
+    public static LOGIN_LOCAL = false;
+    public static LOGIN_CONFIG = {
+        USER_CONTEXT: '000001C'
+    };
 
     private static sha256base64urlEncode(s) {
         let SHA256 = new Hashes.SHA256; // new SHA256 instance
@@ -38,9 +47,12 @@ export class Config {
     };
 
     public static DEFAULT_SETTINGS = {
-        // "authenticated": true,
+        "authenticated": true,
         // "force:newsList": null,
         // "isSyncAvailable": true
+    };
+    public static DEFAULT_SETTINGS_MOBILE = {
+        // "authenticated": true,
     };
 
     public static MOBILE_ORIGIN: string = 'myapp:/';
@@ -63,34 +75,45 @@ export class Config {
         return Config.PLATFORM_TARGET === Config.PLATFORMS.MOBILE_NATIVE;
     }
 
-    public static DEV: IApi = {
+    public static APP_TEST: IApi = {
         OAUTH_HOST: '',
         OAUTH_CLIENTID: '',
         OAUTH_SECRET: '',
         OAUTH_SCOPES: '',
         OAUTH_REDIRECT_URI() {
-            return Config.IS_MOBILE_NATIVE ? Config.MOBILE_ORIGIN + 'login' : window.location.origin + '/login';
+            return Config.MOBILE_ORIGIN + 'login';
         },
         BASE_URL: ''
     }
 
-    public static PROD: IApi = {
+    public static APP_PROD: IApi = {
         OAUTH_HOST: '',
         OAUTH_CLIENTID: '',
         OAUTH_SECRET: '',
         OAUTH_SCOPES: '',
         OAUTH_REDIRECT_URI() {
-            return Config.IS_MOBILE_NATIVE ? Config.MOBILE_ORIGIN + 'login' : window.location.origin + '/login';
+            return Config.MOBILE_ORIGIN + 'login';
         },
         BASE_URL: ''
+    }
+
+    public static WEB: IApi = {
+        OAUTH_HOST: '',
+        OAUTH_CLIENTID: '',
+        OAUTH_SECRET: '',
+        OAUTH_SCOPES: '',
+        OAUTH_REDIRECT_URI() {
+            return window.location.origin + '/login';
+        },
+        BASE_URL: '/api'
     }
 
     // default server
-    public static API: IApi = Config.DEV;
+    public static API: IApi = Config.WEB;
 
     public static CODE = '';
     private static CODE_CHALLANGE_METHOD = 'S256';
-    private static CODE_VERIFIER = Config.randomString(43);
+    public static CODE_VERIFIER = Config.randomString(43);
     private static CODE_CHALLANGE = Config.sha256base64urlEncode(Config.CODE_VERIFIER);
 
     public static get AUTHORIZE_URL(): string {
@@ -119,7 +142,9 @@ export class Config {
     public static ASSET_URL: string = Config.API.BASE_URL + "";
     public static ATTACHMENT_URL: string = Config.API.BASE_URL + "";
     public static MESSAGE_URL: string = Config.API.BASE_URL + "";
-
+    public static get SENDMAIL_URL(): string {
+        return Config.API.BASE_URL + "/sendMail";
+    }
     public static getExtenstion(fileName: string): string {
         return fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2);
     };

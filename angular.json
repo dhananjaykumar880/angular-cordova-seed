@@ -124,5 +124,14 @@
       }
     }
   },
-  "defaultProject": "angular-cordova-seed"
+  "defaultProject": "angular-cordova-seed",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "App",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "App"
+    }
+  }
 }

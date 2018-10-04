@@ -3,21 +3,12 @@
  */
 export interface IActionBarConfig {
     isBack?: Boolean;
-    back?: IActionBack;
     title?: IActionTitle;
     isSideBar?: Boolean;
     isHome?: Boolean;
     isSync?: Boolean;
     isLogout?: Boolean;
     isClose?: Boolean;
-}
-
-/**
- * Interface for back button in Action bar based on visibility
- */
-export interface IActionBack {
-    isBack?: Boolean;
-    isVisible?: Boolean;
 }
 
 /**

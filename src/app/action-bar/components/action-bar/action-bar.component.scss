@@ -1,3 +1,5 @@
+@import 'src/assets/theme/variable';
+
 mat-toolbar {
     position: fixed;
     top: 0;
@@ -9,10 +11,7 @@ mat-toolbar {
     -ms-user-select:none; 
     user-select:none;
     -o-user-select:none;
-}
-
-.remaining-space {
-    flex: 1 1 auto;
+    height: $actionBarHeight;
 }
 
 .material-icons {

@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { ClientDbService, Config, Store, LoadingService, EventHandler } from './common';
 import { CookieService } from 'ngx-cookie-service';
 import { routeAnimation } from './animations';
+import { environment } from '../environments/environment';
 
 declare let cordova;
 
@@ -15,6 +16,7 @@ declare let cordova;
 export class AppComponent implements OnInit {
   isLoading: boolean = false;
   isBack: boolean = false;
+  @ViewChild('sidenav') sideNav;
 
   /**
    * Constructor with service injection
@@ -39,9 +41,12 @@ export class AppComponent implements OnInit {
     @Inject("WINDOW") private window: any
   ) {
     let me = this;
-    this.setSettings(Config.DEFAULT_SETTINGS);
     translate.setDefaultLang('en');
-    translate.use('en');
+    if (translate.getBrowserLang() !== undefined) {
+      translate.use(translate.getBrowserLang());
+    } else {
+      translate.use('en');
+    }
 
     this.spinner.onLoadingChanged.subscribe(isLoading => {
       this.isLoading = isLoading;
@@ -55,6 +60,10 @@ export class AppComponent implements OnInit {
       }, 500);
       me.cd.detectChanges();
     });
+
+    this.eventHandler.on("isSideBar", () => {
+      this.sideNav.toggle();
+    });
   }
   
   /**
@@ -63,8 +72,15 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     document.addEventListener("deviceready", () => {
       Config.PLATFORM_TARGET = Config.PLATFORMS.MOBILE_NATIVE;
+      Config.DEFAULT_SETTINGS = { ...Config.DEFAULT_SETTINGS, ...Config.DEFAULT_SETTINGS_MOBILE };
       window.open = cordova.ThemeableBrowser.open;
+      if (environment.production) {
+        Config.API = Config.APP_PROD;
+      } else {
+        Config.API = Config.APP_TEST;
+      }
     }, false);
+    this.setSettings(Config.DEFAULT_SETTINGS);
     
     this.connectToLocalDb();
   }
